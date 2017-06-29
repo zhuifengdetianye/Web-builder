@@ -1,4 +1,5 @@
 $(document).ready(function(){
+    /*
     $('.linear-layout-module').draggable({
         helper: 'clone'
     });
@@ -47,4 +48,5 @@ $(document).ready(function(){
             });
         }
     });
+    */
 })
