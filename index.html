@@ -13,15 +13,18 @@
     <script src="colorPicker/js/colpick.js"></script>
     <script src="webuploader-0.1.5/js/webuploader.min.js"></script>
     <script src="jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+    <script src="layer/v2.1/layer/layer.js"></script>
+    <script src="layer/layer_func.js"></script>
     <script src="js/draggable.js"></script>
+
 </head>
 <body>
     <div class="container clearfix">
         <!-- 菜单栏start -->
         <ul class="menu-bar clearfix">
             <li class="fl"><a href="javascript:void(0);"><i class="fa fa-floppy-o"></i>保存</a></li>
-            <li class="fl"><a href="javascript:void(0);"><i class="fa fa-reply"></i>上一步</a></li>
-            <li class="fl"><a href="javascript:void(0);"><i class="fa fa-share"></i>下一步</a></li>
+            <li class="fl"><a class="last-step" href="javascript:void(0);"><i class="fa fa-reply"></i>上一步</a></li>
+            <li class="fl"><a class="next-step" href="javascript:void(0);"><i class="fa fa-share"></i>下一步</a></li>
             <li class="fl"><a href="javascript:void(0);"><i class="fa fa-eye"></i>预览</a></li>
         </ul>
         <!-- 菜单栏end -->
@@ -47,7 +50,7 @@
                     <li class="article-list">
                         <div class="article-list-title clearfix"><h3 class="fl">文章列表栏目</h3><i class="fr fa fa-chevron-down"></i></div>
                         <ul class="article-list-box clearfix">
-                            <li class="fl"><a href="javascript:void(0);"><img src="img/icon-column1.png" alt="文章列表1"><span>文章列表栏目1</span></a></li>
+                            <li class="fl article-list-module1"><a href="javascript:void(0);"><img src="img/icon-column1.png" alt="文章列表1"><span>文章列表栏目1</span></a></li>
                             <li class="fl"><a href="javascript:void(0);"><img src="img/icon-column1.png" alt="文章列表2"><span>文章列表栏目2</span></a></li>
                             <li class="fl"><a href="javascript:void(0);"><img src="img/icon-column1.png" alt="文章列表3"><span>文章列表栏目3</span></a></li>
                             <li class="fl"><a href="javascript:void(0);"><img src="img/icon-column1.png" alt="文章列表4"><span>文章列表栏目4</span></a></li>

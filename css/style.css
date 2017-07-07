@@ -399,7 +399,7 @@ input::-webkit-input-placeholder{
 .left .column-module .article-list li,
 .left .column-module .link li,
 .left .column-module .login li {
-    width: 50%;
+    width: 100px;
     margin-top: 10px;
 }
 .left .column-module .article-list li a,
@@ -649,4 +649,14 @@ input::-webkit-input-placeholder{
     outline: 1px dashed #ddd !important;
     visibility: visible !important; 
     border-radius: 4px;
+}
+.toolbar-close{
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+}
+.toolbar-close .fa-window-close{
+    color: #f00;
+    font-size: 18px;
 }
