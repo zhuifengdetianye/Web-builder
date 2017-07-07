@@ -148,6 +148,11 @@ $(document).ready(function(){
                 {selector: this.containers[0].target, connectWith: ''},
                 {selector: this.containers[1].target, connectWith: this.containers[1].target},
                 {selector: '', connectWith: this.containers[2].target}
+            ],
+            [
+                {selector: this.containers[0].target, connectWith: ''},
+                {selector: this.containers[1].target, connectWith: this.containers[1].target},
+                {selector: this.containers[2].target, connectWith: this.containers[2].target}
             ]
         ];
         
@@ -266,6 +271,8 @@ $(document).ready(function(){
                 $(this).parent().remove();
                 var html = jQuery.trim($('#operationPanelContainer').html());
                 $this.handleStack.pushStack($this.handleStack.DOMStack, html, 0);
+                //添加sortable                            
+                $this.addSortable($(this), $this.sortConfs[3]);
             });
         };
 
@@ -282,6 +289,8 @@ $(document).ready(function(){
                 event.stopPropagation();
                 //在当前元素上添加工具
                 $this.addToolbar($(this));
+                //添加sortable                            
+                $this.addSortable($(this), $this.sortConfs[3]);
             });
             //容器失去焦点的时候，删除toolbar
             $(document).on('click', function(){
