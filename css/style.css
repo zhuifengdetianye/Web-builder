@@ -626,6 +626,11 @@ input::-webkit-input-placeholder{
 /*------------------------------------------------------------------
                           CONTAINTER STYLE
 -------------------------------------------------------------------*/
+.left .linear-layout,
+.left .sub-container,
+.left .column-container{
+    display: none;
+}
 .linear-layout {
     position: relative;
     width: 100%;
