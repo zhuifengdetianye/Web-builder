@@ -631,19 +631,34 @@ input::-webkit-input-placeholder{
 .left .column-container{
     display: none;
 }
-.linear-layout {
+.center .linear-layout-module {
+    width: 1000px;
+    margin: 0 auto;
+}
+.center .sub-container-module {
+    float: left;
+}
+.center .column-container-module {
+    float: left;
+}
+.center .linear-layout-module a,
+.center .sub-container-module a,
+.center .column-container-module a {
+    display:none;
+}
+.center .linear-layout {
     position: relative;
     width: 100%;
     min-height: 200px;
     border: 1px solid #f00;
 }
-.sub-container {
+.center .sub-container {
     position: relative;
     width: 200px;
     min-height: 200px;
     border: 1px solid #0f0;
 }
-.column-container {
+.center .column-container {
     position: relative;
     width: 90px;
     min-height: 90px;
