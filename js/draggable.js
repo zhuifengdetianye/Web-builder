@@ -31,6 +31,7 @@ $(document).ready(function(){
 					});
 				}
 			});
+
 		}
 	});
 
@@ -63,7 +64,8 @@ $(document).ready(function(){
 
 	//注册栏目容器的拖拽事件
 	$(".column-container-module").draggable({
-		connectToSortable: ".sub-container",
+		//这里注册可以在行容器和子容器之间拖拽排序
+		connectToSortable: ".linear-layout, .sub-container",
 		helper: "clone",
 		start: function(e, t) {
 
@@ -75,5 +77,6 @@ $(document).ready(function(){
 			
 		}
 	});
+	
 
 })
