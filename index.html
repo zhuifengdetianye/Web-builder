@@ -2,12 +2,16 @@
 <html lang="zh-CN">
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	<title>网页快速构建edit</title>
 	<link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/style.css">
     <link href="font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"></link>
     <link rel="stylesheet" href="colorPicker/css/colpick.css">
     <link rel="stylesheet" href="jquery-ui-1.12.1.custom/jquery-ui.min.css">
+    <link rel="stylesheet" href="CodeMirror/css/codemirror.css">
+    <link rel="stylesheet" href="CodeMirror/theme/abcdef.css">
+    <link rel="stylesheet" href="CodeMirror/theme/ambiance.css">
     <script src="js/jquery-1.9.1.min.js"></script>
     <script src="js/jquery.SuperSlide.js"></script>
     <script src="colorPicker/js/colpick.js"></script>
@@ -15,40 +19,46 @@
     <script src="jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
     <script src="layer/v2.1/layer/layer.js"></script>
     <script src="layer/layer_func.js"></script>
+    <script src="CodeMirror/js/codemirror.js"></script>
+    <script src="CodeMirror/language/xml.js"></script>
+    <script src="js/HTMLFormat.js"></script>
     <script src="js/draggable.js"></script>
 
 </head>
-<body>
+<body class="edit">
     <div class="container clearfix">
         <!-- 菜单栏start -->
         <ul class="menu-bar clearfix">
             <li class="fl"><a href="javascript:void(0);"><i class="fa fa-floppy-o"></i>保存</a></li>
             <li class="fl"><a class="last-step" href="javascript:void(0);"><i class="fa fa-reply"></i>上一步</a></li>
             <li class="fl"><a class="next-step" href="javascript:void(0);"><i class="fa fa-share"></i>下一步</a></li>
-            <li class="fl"><a href="javascript:void(0);"><i class="fa fa-eye"></i>预览</a></li>
+            <li class="fl"><a class="preview-page" href="javascript:void(0);"><i class="fa fa-eye"></i>预览</a></li>
+            <li class="fl"><a class="download" href="javascript:void(0);"><i class="fa fa-download"></i>下载</a></li>
+            <li class="fl"><a class="clear-page" href="javascript:void(0);"><i class="fa fa-trash"></i>清空</a></li>
         </ul>
         <!-- 菜单栏end -->
         <!-- 左侧栏start -->
         <div class="left fl">
+            <div class="clean-code"></div>
             <div class="page-structure-module">
                 <h2>网页结构布局组件</h2>
                 <ul class="clearfix">
                     <li class="fl">
                         <div class="linear-layout-module">
-                            <a href="javascript:void(0);"><img src="img/icon-row.png" alt="行容器"><span>行容器</span></a>
+                            <a class="preview-img" href="javascript:void(0);"><img src="img/icon-row.png" alt="行容器"><span>行容器</span></a>
                             <div class="linear-layout clearfix"></div>             
                         </div>
                     </li>
                     <li class="fl">
                         <div class="sub-container-module">
-                            <a href="javascript:void(0);"><img src="img/icon-row-children.png" alt="子容器"><span>子容器</span></a>
+                            <a class="preview-img" href="javascript:void(0);"><img src="img/icon-row-children.png" alt="子容器"><span>子容器</span></a>
                             <div class="sub-container fl clearfix"></div>
                         </div>                        
                     </li>
                     <li class="fl">
                         <div class="column-container-module">
-                            <a href="javascript:void(0);"><img src="img/icon-column.png" alt="栏目容器"><span>栏目容器</span></a>
-                            <div class="column-container fl"></div>
+                            <a class="preview-img" href="javascript:void(0);"><img src="img/icon-column.png" alt="栏目容器"><span>栏目容器</span></a>
+                            <div class="column-container fl clearfix"></div>
                         </div>    
                     </li>
                 </ul>
@@ -59,51 +69,33 @@
                     <li class="article-list">
                         <div class="article-list-title clearfix"><h3 class="fl">文章列表栏目</h3><i class="fr fa fa-chevron-down"></i></div>
                         <ul class="article-list-box clearfix">
-                            <li class="fl article-list-module1"><a href="javascript:void(0);"><img src="img/icon-column1.png" alt="文章列表1"><span>文章列表栏目1</span></a></li>
-                            <li class="fl"><a href="javascript:void(0);"><img src="img/icon-column1.png" alt="文章列表2"><span>文章列表栏目2</span></a></li>
-                            <li class="fl"><a href="javascript:void(0);"><img src="img/icon-column1.png" alt="文章列表3"><span>文章列表栏目3</span></a></li>
-                            <li class="fl"><a href="javascript:void(0);"><img src="img/icon-column1.png" alt="文章列表4"><span>文章列表栏目4</span></a></li>
+                           
                         </ul>
                     </li>
                     <li class="link">
                         <div class="link-title clearfix"><h3 class="fl">链接栏目</h3><i class="fr fa fa-chevron-down"></i></div>
                         <ul class="link-box clearfix">
-                            <li class="fl"><a href="javascript:void(0);"><img src="img/icon-column1.png" alt="链接栏目1"><span>链接栏目1</span></a></li>
-                            <li class="fl"><a href="javascript:void(0);"><img src="img/icon-column1.png" alt="链接栏目2"><span>链接栏目2</span></a></li>
-                            <li class="fl"><a href="javascript:void(0);"><img src="img/icon-column1.png" alt="链接栏目3"><span>链接栏目3</span></a></li>
-                            <li class="fl"><a href="javascript:void(0);"><img src="img/icon-column1.png" alt="链接栏目4"><span>链接栏目4</span></a></li>
+                            
                         </ul>
                     </li>
                     <li class="login">
                         <div class="login-title clearfix"><h3 class="fl">登录栏目</h3><i class="fr fa fa-chevron-down"></i></div>
                         <ul class="login-box clearfix">
-                            <li class="fl"><a href="javascript:void(0);"><img src="img/icon-column1.png" alt="登录栏目1"><span>登录栏目1</span></a></li>
-                            <li class="fl"><a href="javascript:void(0);"><img src="img/icon-column1.png" alt="登录栏目2"><span>登录栏目2</span></a></li>
-                            <li class="fl"><a href="javascript:void(0);"><img src="img/icon-column1.png" alt="登录栏目3"><span>登录栏目3</span></a></li>
-                            <li class="fl"><a href="javascript:void(0);"><img src="img/icon-column1.png" alt="登录栏目4"><span>登录栏目4</span></a></li>
+                            
                         </ul>
                     </li>
                 </ul>
             </div>
             <div class="top-nav-module">
                 <h2>顶部导航组件</h2>
-                <ul class="clearfix">
-                    <li class="fl"><a href="javascript:void(0);"><img src="img/icon-top-nav.png" alt="顶部导航组件1"><span>顶部导航组件1</span></a></li>
-                    <li class="fl"><a href="javascript:void(0);"><img src="img/icon-top-nav.png" alt="顶部导航组件2"><span>顶部导航组件2</span></a></li>
-                    <li class="fl"><a href="javascript:void(0);"><img src="img/icon-top-nav.png" alt="顶部导航组件3"><span>顶部导航组件3</span></a></li>
+                <ul class="top-nav-box clearfix">
+                    
                 </ul>
             </div>
-            <div class="top-nav-module">
+            <div class="basic-element-module">
                 <h2>网页元素</h2>
-                <ul class="clearfix">
-                    <li class="fl"><a href="javascript:void(0);"><img src="img/icon-top-nav.png" alt="容器"><span>容器</span></a></li>
-                    <li class="fl"><a href="javascript:void(0);"><img src="img/icon-top-nav.png" alt="标题"><span>标题</span></a></li>
-                    <li class="fl"><a href="javascript:void(0);"><img src="img/icon-top-nav.png" alt="分割线"><span>分割线</span></a></li>
-                    <li class="fl"><a href="javascript:void(0);"><img src="img/icon-top-nav.png" alt="文字"><span>文字</span></a></li>
-                    <li class="fl"><a href="javascript:void(0);"><img src="img/icon-top-nav.png" alt="图片"><span>图片</span></a></li>
-                    <li class="fl"><a href="javascript:void(0);"><img src="img/icon-top-nav.png" alt="按钮"><span>按钮</span></a></li>
-                    <li class="fl"><a href="javascript:void(0);"><img src="img/icon-top-nav.png" alt="视频"><span>视频</span></a></li>
-                    <li class="fl"><a href="javascript:void(0);"><img src="img/icon-top-nav.png" alt="链接"><span>链接</span></a></li>
+                <ul class="basic-element-box clearfix">
+                    
                 </ul>
             </div>
         </div>
@@ -401,13 +393,13 @@
         </div>
         <!-- 右侧部分end -->
     </div>
-    
+    <div class="show-code"><textarea class="textarea"></textarea></div>
 </body>
 <script>
     $(document).ready(function(){
         //栏目组件的显示隐藏
         $('.column-module i').on('click', function(){
-            $(this).parent().parent().find('ul').toggle('normal');
+            $(this).parent().parent().find('.article-list-box ,.link-box, .login-box').toggle('normal');
         });
         $('.size-and-position-position-slide').slide({});
 

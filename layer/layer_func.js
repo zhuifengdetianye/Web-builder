@@ -8,16 +8,6 @@
  */
 //配置skin
 layer.config({
-	//skin:'layer-ext-espresso',
-	//extend:'skin/espresso/style.css'
+	skin:'layer-ext-espresso',
+	extend:'skin/espresso/style.css'
 });
-// 提示信息 content: 内容
-function alertMsg(content, icon) {
-    layer.msg(content, {
-        icon : icon,
-        closeBtn : '2',
-        time : 1500,
-        area : [ '240px', '135px' ],
-        shade : [ 0.5, '#393D49' ]
-    });
-}
