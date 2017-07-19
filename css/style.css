@@ -557,7 +557,6 @@ input::-webkit-input-placeholder{
 .right .style-abstract,
 .right .edit-css-js {
     border-bottom: 1px solid #333;
-    border-right: 1px solid #333;
 }
 .right .background > div,
 .right .shadow > div,

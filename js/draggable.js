@@ -233,7 +233,15 @@ $(document).ready(function(){
 		
 		//添加DOM到操作栈
 		saveHtml();
+
+		//实例化DOM树
+		instantiationTree();
 	});
+
+	//设置toolbar在失去焦点的时候，消失
+	// $(document).on('click', function(){
+	// 	$('.toolbar').parent().css({border:'none'}).end().remove();
+	// })
 
 	//添加点击预览按钮时的事件
 	$('.preview-page').on('click', function(){
@@ -290,16 +298,28 @@ $(document).ready(function(){
 	//添加点击清空按钮时的事件
 	$('.clear-page').on('click', function(){
 		if(supportStorage()){
-			localStorage.clear();
+			if(localStorage.getItem('demohtml')){
+				localStorage.clear();
+				layer.msg('数据已清除！');
+			}else{
+				layer.msg('无数据可清除！');
+			}			
 		}
 		$('#operationPanelContainer').children().remove();
-	})
+
+		//实例化DOM树
+		instantiationTree();
+	});
 
 	//从本地存储中取出上一次的版本
 	getLatestOperation();
 
 	//添加拖拽事件
 	addDragEvent();
+
+	//实例化DOM树
+	instantiationTree();
+	
 });
 
 /**
@@ -312,19 +332,23 @@ function resizeContainer(){
 	$('.center .column-container').each(function(){
 		var height = $(this).height();
 		if(height && height !== $(this).parent().height()){
-			$(this).parent().css({height:height});
+			$(this).parent().css({height:height+2});
 		}
-	})
+	});
+
+	//再检测.sub-container和.sub-container-module尺寸是否一致
 	$('.center .sub-container').each(function(){
 		var height = $(this).height();
 		if(height && height !== $(this).parent().height()){
-			$(this).parent().css({height:height});
+			$(this).parent().css({height:height+2});
 		}
-	})
+	});
+
+	//先检测.linear-layout和.linear-layout-module尺寸是否一致
 	$('.center .linear-layout').each(function(){
 		var height = $(this).height();
 		if(height && height !== $(this).parent().height()){
-			$(this).parent().css({height:height});
+			$(this).parent().css({height:height+2});
 		}
 	})
 }
@@ -407,9 +431,13 @@ function objectNameToClassName(str){
  * @return null
  */	
 function saveHtml() {
+	//在页面上有新的操作的时候，检测当前页面中各个容器的尺寸
 	resizeContainer();
-	window.demohtml = jQuery.trim($('#operationPanelContainer').html());
+
+	window.demohtml = jQuery.trim($('#operationPanelContainer').remove('.toolbar').html());
 	handleStack.pushStack(handleStack.DOMStack, window.demohtml, 0);
+
+	//保存最新操作到本地
 	saveLatestOperation();
 }
 
@@ -438,8 +466,14 @@ function restoreSortable() {
 					$('.column-container').sortable({
 						connectWith: '.column-container',
 						stop: function(e, t) {
+							//给栏目添加随机ID
+							setColumnId(t.item, genNonDuplicateID());
+
 							//添加DOM到操作栈
 							saveHtml();
+
+							//实例化DOM树
+							instantiationTree();
 						}
 					})
 				}
@@ -458,8 +492,14 @@ function restoreSortable() {
 			$('.column-container').sortable({
 				connectWith: '.column-container',
 				stop: function(e, t) {
+					//给栏目添加随机ID
+					setColumnId(t.item, genNonDuplicateID());
+
 					//添加DOM到操作栈
 					saveHtml();
+
+					//实例化DOM树
+					instantiationTree();
 				}
 			})
 		}
@@ -468,10 +508,26 @@ function restoreSortable() {
 	$('.column-container').sortable({
 		connectWith: '.column-container',
 		stop: function(e, t) {
+			//给栏目添加随机ID
+			setColumnId(t.item, genNonDuplicateID());
+
 			//添加DOM到操作栈
 			saveHtml();
+
+			//实例化DOM树
+			instantiationTree();
 		}
 	})
+}
+
+/**
+ * setColumnId(obj, id) 设置栏目id
+ * @param <Obj> obj 
+ * @param <String> id
+ * @return null
+ */
+function setColumnId(obj, id){
+	!obj.find('.view').attr('id') && obj.find('.view').attr('id', id);
 }
 
 /**
@@ -501,16 +557,7 @@ function addDragEvent(){
 	//注册子容器的拖拽事件
 	$(".left .sub-container-module").draggable({
 		connectToSortable: ".linear-layout",
-		helper: "clone",
-		start: function(e, t) {
-
-		},
-		drag: function(e, t) {
-			
-		},
-		stop: function(e, t) {
-			
-		}
+		helper: "clone"
 	});
 
 	//注册栏目容器的拖拽事件

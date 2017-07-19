@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="CodeMirror/css/codemirror.css">
     <link rel="stylesheet" href="CodeMirror/theme/abcdef.css">
     <link rel="stylesheet" href="CodeMirror/theme/ambiance.css">
+    <link rel="stylesheet" href="zTree_v3/css/zTreeStyle.css">
     <script src="js/jquery-1.9.1.min.js"></script>
     <script src="js/jquery.SuperSlide.js"></script>
     <script src="colorPicker/js/colpick.js"></script>
@@ -21,9 +22,10 @@
     <script src="layer/layer_func.js"></script>
     <script src="CodeMirror/js/codemirror.js"></script>
     <script src="CodeMirror/language/xml.js"></script>
+    <script src="zTree_v3/js/jquery.ztree.core-3.5.min.js"></script>
     <script src="js/HTMLFormat.js"></script>
     <script src="js/draggable.js"></script>
-
+    <script src="js/DOMTreeToJson.js"></script>
 </head>
 <body class="edit">
     <div class="container clearfix">
@@ -388,6 +390,7 @@
             <!-- 树形结构start -->
             <div class="dom-tree">
                 <!-- 使用ztree -->
+                <ul id="treeDemo" class="ztree"></ul>
             </div>
             <!-- 树形结构end -->
         </div>
