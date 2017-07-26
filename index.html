@@ -26,6 +26,7 @@
     <script src="js/HTMLFormat.js"></script>
     <script src="js/draggable.js"></script>
     <script src="js/DOMTreeToJson.js"></script>
+    <script src="js/seekeditCSS.js"></script>
 </head>
 <body class="edit">
     <div class="container clearfix">
@@ -125,21 +126,21 @@
                             <div class="size-and-position-size-width fl">
                                 <div class="size-and-position-size-width1">
                                     <label>宽</label>
-                                    <input type="text" class="input-text size-sml" name="size-and-position-size-width">
+                                    <input type="text" class="input-text size-sml" name="width">
                                 </div>
                                 <div class="size-and-position-size-width2">
-                                    <input type="text" class="input-text size-sml" name="size-and-position-size-max-width" placeholder="max">
-                                    <input type="text" class="input-text size-sml" name="size-and-position-size-min-width" placeholder="min">
+                                    <input type="text" class="input-text size-sml" name="max-width" placeholder="max">
+                                    <input type="text" class="input-text size-sml" name="min-width" placeholder="min">
                                 </div>
                             </div>
                             <div class="size-and-position-size-height fr">
                                 <div class="size-and-position-size-height1">
-                                    <label>宽</label>
-                                    <input type="text" class="input-text size-sml" name="size-and-position-size-height">
+                                    <label>高</label>
+                                    <input type="text" class="input-text size-sml" name="height">
                                 </div>
                                 <div class="size-and-position-size-height2">
-                                    <input type="text" class="input-text size-sml" name="size-and-position-size-max-height" placeholder="max">
-                                    <input type="text" class="input-text size-sml" name="size-and-position-size-min-height" placeholder="min">
+                                    <input type="text" class="input-text size-sml" name="max-height" placeholder="max">
+                                    <input type="text" class="input-text size-sml" name="min-height" placeholder="min">
                                 </div>
                             </div>
                         </div>
@@ -167,26 +168,26 @@
                                 <ul class="bd">
                                     <li>
                                         <div class="size-and-position-position-margin">
-                                            <input name="size-and-position-position-margin-top" class="input-text size-sml size-and-position-position-top" type="text" placeholder="--">
-                                            <input name="size-and-position-position-margin-right" class="input-text size-sml size-and-position-position-right" type="text" placeholder="--">
-                                            <input name="size-and-position-position-margin-bottom" class="input-text size-sml size-and-position-position-bottom" type="text" placeholder="--">
-                                            <input name="size-and-position-position-margin-left" class="input-text size-sml size-and-position-position-left" type="text" placeholder="--">
+                                            <input name="margin-top" class="input-text size-sml size-and-position-position-top" type="text" placeholder="--">
+                                            <input name="margin-right" class="input-text size-sml size-and-position-position-right" type="text" placeholder="--">
+                                            <input name="margin-bottom" class="input-text size-sml size-and-position-position-bottom" type="text" placeholder="--">
+                                            <input name="margin-left" class="input-text size-sml size-and-position-position-left" type="text" placeholder="--">
                                         </div>
                                     </li>
                                     <li>
                                         <div class="size-and-position-position-margin">
-                                            <input name="size-and-position-position-padding-top" class="input-text size-sml size-and-position-position-top" type="text" placeholder="--">
-                                            <input name="size-and-position-position-padding-right" class="input-text size-sml size-and-position-position-right" type="text" placeholder="--">
-                                            <input name="size-and-position-position-padding-bottom" class="input-text size-sml size-and-position-position-bottom" type="text" placeholder="--">
-                                            <input name="size-and-position-position-padding-left" class="input-text size-sml size-and-position-position-left" type="text" placeholder="--">
+                                            <input name="padding-top" class="input-text size-sml size-and-position-position-top" type="text" placeholder="--">
+                                            <input name="padding-right" class="input-text size-sml size-and-position-position-right" type="text" placeholder="--">
+                                            <input name="padding-bottom" class="input-text size-sml size-and-position-position-bottom" type="text" placeholder="--">
+                                            <input name="padding-left" class="input-text size-sml size-and-position-position-left" type="text" placeholder="--">
                                         </div>
                                     </li>
                                     <li>
                                         <div class="size-and-position-position-margin">
-                                            <input name="size-and-position-position-position-top" class="input-text size-sml size-and-position-position-top" type="text" placeholder="--">
-                                            <input name="size-and-position-position-position-right" class="input-text size-sml size-and-position-position-right" type="text" placeholder="--">
-                                            <input name="size-and-position-position-position-bottom" class="input-text size-sml size-and-position-position-bottom" type="text" placeholder="--">
-                                            <input name="size-and-position-position-position-left" class="input-text size-sml size-and-position-position-left" type="text" placeholder="--">
+                                            <input name="top" class="input-text size-sml size-and-position-position-top" type="text" placeholder="--">
+                                            <input name="right" class="input-text size-sml size-and-position-position-right" type="text" placeholder="--">
+                                            <input name="bottom" class="input-text size-sml size-and-position-position-bottom" type="text" placeholder="--">
+                                            <input name="left" class="input-text size-sml size-and-position-position-left" type="text" placeholder="--">
                                         </div>
                                     </li>
                                 </ul>
@@ -205,6 +206,26 @@
                         <div class="background-image clearfix">
                             <label class="fl" for="backgroundImage">background-image</label>
                             <div class="fl"><input class="input-text size-sml" type="text" name="background-image" id="backgroundImage"><div id="upLoadImg">•••</div></div>
+                        </div>
+                        <div class="background-position-x clearfix">
+                            <label class="fl" for="backgroundPositionX">background-pos-x</label>
+                            <div class="fl">
+                                <select class="select size-sml" name="background-position-x" id="backgroundPositionX">
+                                    <option value="left">left</option>
+                                    <option value="center">center</option>
+                                    <option value="right">right</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="background-position-y clearfix">
+                            <label class="fl" for="backgroundPositionY">background-pos-y</label>
+                            <div class="fl">
+                                <select class="select size-sml" name="background-position-y" id="backgroundPositionY">
+                                    <option value="top">top</option>
+                                    <option value="center">center</option>
+                                    <option value="bottom">bottom</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                     <!-- 背景end -->
@@ -237,16 +258,20 @@
                             <label class="fl">radius</label>
                             <div class="fl"><input class="input-text size-sml" type="text" name="border-radius"></div>
                         </div>
+                        <!--
                         <div class="border-radius-slide">
                             <div id="borderRadius"></div>
                         </div>
+                        -->
                         <div class="border-width clearfix">
                             <label class="fl">width</label>
                             <div class="fl"><input class="input-text size-sml" type="text" name="border-width"></div>
                         </div>
+                        <!--
                         <div class="border-width-slide">
                             <div id="borderWidth"></div>
                         </div>
+                        -->
                         <div class="border-color clearfix">
                             <label class="fl" for="borderColor">color</label>
                             <div class="fl"><input class="input-text size-sml" type="text" name="border-color" id="borderColor"></div>
@@ -274,7 +299,7 @@
                     <div class="style-display clearfix">
                         <label class="fl">position</label>
                         <div class="fl">
-                            <select class="select size-sml" name="style-display" id="">
+                            <select class="select size-sml" name="style-position" id="">
                                 <option value="inherit">inherit</option>
                                 <option value="fixed">fixed</option>
                                 <option value="relative">relative</option>
@@ -445,17 +470,28 @@
         }); 
 
         //滑动条
-        $( '#borderRadius' ).slider({
-            slide: function(event, ui) {
-                $('input[name="border-radius"]').val(ui.value + '%');
-            }
-
-        }); 
-        $( '#borderWidth' ).slider({
-            slide: function(event, ui) {
-                $('input[name="border-width"]').val(ui.value + '%')
-            }
-        });      
+        // $( '#borderRadius' ).slider({
+        //     slide: function(event, ui) {
+        //         $('input[name="border-radius"]').val(ui.value + '%');
+        //     }
+        // }); 
+        var nameArr = ['width', 'min-width', 'max-width', 'height', 'max-height', 'min-height', 'shadow-offsetx', 'shadow-offsety','shadow-blur-radius',
+         'border-radius', 'border-width'];
+        var positionArr = ['margin-top', 'margin-right', 'margin-bottom', 'margin-left', 'padding-top', 'padding-right', 'padding-bottom', 'padding-left', 'top', 'right', 'bottom', 'left'];
+        for(var i in nameArr){
+            $('input[name="'+ nameArr[i] +'"]').spinner();
+        }
+        for(var j in positionArr){
+            $('input[name="'+ positionArr[j] +'"]').spinner({
+                create: function( event, ui ) {
+                    var reg = /(top)|(right)|(bottom)|(left)/i;
+                    var name = event.target.name;
+                    console.log(name)
+                    $(event.target).parent().addClass(name.match(reg)[0]);
+                }
+            });
+        }
+        $('.ui-spinner a').remove();   
 
     })
 </script>

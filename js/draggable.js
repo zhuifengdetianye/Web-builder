@@ -156,7 +156,7 @@ var editor;
 $(document).ready(function(){
 	//循环组件，并把他们插入到相应的容器当中
 	for(var i in modules){
-		var className = objectNameToClassName(i);
+		var className = reverseCamel(i);
 		for(var j in modules[i]){
 			$('.' + className + '-box').append('<li class="fl"><div class="box"><a class="preview-img" href="javascript:void(0);"><img src="img/'+ modules[i][j].preview +'" alt="'+ modules[i][j].name +'"><span>'+ modules[i][j].name +'</span></a><div class="view">'+ modules[i][j].html +'</div></div></li>');
 		}	
@@ -219,7 +219,7 @@ $(document).ready(function(){
 		var toolbar = new Toolbar();
 		toolbarEntity = toolbar.init();
 		$(this).append(toolbarEntity);
-		$(this).css({border:'1px solid #660066'});
+		//$(this).css({border:'1px solid #660066'});
 
 	});
 
@@ -228,20 +228,15 @@ $(document).ready(function(){
 		//阻止事件冒泡
 		event.stopPropagation();
 
-		//删除toolbar
-		$(this).parent().parent().remove();
-		
 		//添加DOM到操作栈
 		saveHtml();
+
+		//删除toolbar
+		$(this).parent().parent().remove();		
 
 		//实例化DOM树
 		instantiationTree();
 	});
-
-	//设置toolbar在失去焦点的时候，消失
-	// $(document).on('click', function(){
-	// 	$('.toolbar').parent().css({border:'none'}).end().remove();
-	// })
 
 	//添加点击预览按钮时的事件
 	$('.preview-page').on('click', function(){
@@ -413,11 +408,11 @@ function cleanHtml(e) {
 }
 
 /**
- * objectNameToClassName(str) 把驼峰书写形式改成用“-”隔开的形式
+ * reverseCamel(str) 把驼峰书写形式改成用“-”隔开的形式
  * @param <String> str 
  * @return <String>
  */	
-function objectNameToClassName(str){
+function reverseCamel(str){
 	var reg = /[A-Z]+/g;
 	return str.replace(reg, function(a){
 		return '-' + a.toLowerCase();
@@ -593,7 +588,8 @@ function saveLatestOperation() {
  * @return null
  */	
 function getLatestOperation(){
-	if(supportStorage()){
+	
+	if(supportStorage() && localStorage.getItem('demohtml') != 'undefined'){
 		window.demohtml = JSON.parse(localStorage.getItem('demohtml'));
 		if(window.demohtml){
 			$('#operationPanelContainer').append(window.demohtml);

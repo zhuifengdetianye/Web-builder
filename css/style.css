@@ -526,16 +526,37 @@ input::-webkit-input-placeholder{
     border: 3px solid #424242;
     border-radius: 3px; 
 }
-.right .size-and-position .size-and-position-position-slide .bd input {
+.right .size-and-position .size-and-position-position-slide .bd input{
+    width: 50px;
+    height: 20px;
+    text-align: center;
+}
+.right .size-and-position .size-and-position-position-slide .bd span {
     position: absolute;
     width: 50px;
     height: 20px;
     margin-left: -25px;
     margin-top: -10px;
     border-radius: 3px;
-    text-align: center;
 }
-.right .size-and-position .size-and-position-position-slide .bd input.size-and-position-position-top{
+.right .size-and-position .size-and-position-position-slide .bd span.top{
+    top: 0;
+    left: 50%;
+}
+.right .size-and-position .size-and-position-position-slide .bd span.right{
+    left: 100%;
+    top: 50%;
+    min-height: 0;
+}
+.right .size-and-position .size-and-position-position-slide .bd span.bottom{
+    left: 50%;
+    top: 100%;
+}
+.right .size-and-position .size-and-position-position-slide .bd span.left{
+    left: 0;
+    top: 50%;
+}
+/*.right .size-and-position .size-and-position-position-slide .bd input.size-and-position-position-top{
     top: 0;
     left: 50%;
 }
@@ -550,7 +571,7 @@ input::-webkit-input-placeholder{
 .right .size-and-position .size-and-position-position-slide .bd input.size-and-position-position-left{
     left: 0;
     top: 50%;
-}
+}*/
 .right .background,
 .right .shadow,
 .right .border,
@@ -624,7 +645,8 @@ input::-webkit-input-placeholder{
 .right .style-abstract h2 {
     border-top: 1px solid #333;
 }
-.right .style-abstract .select {
+.right .style-abstract .select,
+.right .background .select {
     width: 140px;
 }
 .right .edit-css-js {
@@ -714,9 +736,17 @@ input::-webkit-input-placeholder{
     color:#333; 
     line-height: 25px; 
     text-decoration: none;
+    cursor: pointer;
 }
 .article-list-column1 li a:hover{
     color: #ffb31f;
+}
+.article-list-column2{
+    box-shadow: 2px 2px 5px #aaa;
+    border-radius: 50px;
+}
+.article-list-column2 li{
+    margin-left: 10px;
 }
 .article-list-column2 li a {
     line-height: 25px;
@@ -783,6 +813,7 @@ input::-webkit-input-placeholder{
     top: 0;
     right: 0;
     cursor: pointer;
+    z-index: 2;
 }
 .toolbar-close .fa-window-close{
     color: #f00;
@@ -801,4 +832,20 @@ input::-webkit-input-placeholder{
 }
 .CodeMirror-sizer{
     margin-left: 30px !important;
+}
+
+/*------------------------------------------------------------------
+                          自增输入框样式
+-------------------------------------------------------------------*/
+.ui-spinner-input {
+    margin: 0 !important;
+    padding: 2px 5px !important;
+    border: 1px solid #aaaaaa !important;
+}
+.ui-widget.ui-widget-content {
+    border: none !important;
+}
+.right .shadow .ui-spinner-input,
+.right .border .ui-spinner-input {
+    width: 143px;
 }

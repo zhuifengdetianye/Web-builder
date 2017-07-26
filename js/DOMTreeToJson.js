@@ -37,15 +37,28 @@ function onClick(event, treeId, treeNode, clickFlag) {
     var pathArr = id.split('');
     var ele = positionedElements($('#operationPanelContainer .view'), pathArr);
     
-    //添加toolbar
-    $('.toolbar').parent().css({border:'none'});
+    //把以前的toolbar所在的元素，恢复原来状态
+    var lastToolbarParent = $('.toolbar').parent();
+    lastToolbarParent.css({position:'static'});
+    if(lastToolbarParent.data('display')){
+        lastToolbarParent.css({display:lastToolbarParent.data('display')})
+    }
     $('.toolbar').remove();
 
     //在当前元素上添加工具
     var toolbar = new Toolbar();
     var toolbarEntity = toolbar.init();
-    ele.append(toolbarEntity);
-    console.log(ele.css('border-left'));
+    ele.append(toolbarEntity).css({position:'relative'});
+    
+    console.log(getStyle(ele))
+    showStyle(getStyle(ele));
+
+    //保存元素的display状态    
+    if(ele.css('display') == 'inline'){
+        ele.css({display:'inline-block'});
+        ele.data('display', ele.css('display'));
+    }
+    
    
     
 }
