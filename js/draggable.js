@@ -212,14 +212,14 @@ $(document).ready(function(){
 		event.stopPropagation();
 
 		//取出当前的toolbar
-		$('.toolbar').parent().css({border:'none'});
+		$('.toolbar').parent().css({border:'none'}).removeClass('currentEle');
 		$('.toolbar').remove();
 
 		//在当前元素上添加工具
 		var toolbar = new Toolbar();
 		toolbarEntity = toolbar.init();
 		$(this).append(toolbarEntity);
-		//$(this).css({border:'1px solid #660066'});
+		$(this).addClass('currentEle');
 
 	});
 
@@ -228,11 +228,11 @@ $(document).ready(function(){
 		//阻止事件冒泡
 		event.stopPropagation();
 
-		//添加DOM到操作栈
-		saveHtml();
-
 		//删除toolbar
-		$(this).parent().parent().remove();		
+		$(this).parent().parent().remove();	
+		
+		//添加DOM到操作栈
+		saveHtml();	
 
 		//实例化DOM树
 		instantiationTree();
@@ -295,9 +295,9 @@ $(document).ready(function(){
 		if(supportStorage()){
 			if(localStorage.getItem('demohtml')){
 				localStorage.clear();
-				layer.msg('数据已清除！');
+				layer.msg('数据已清除！', {time:2000, icon:1});
 			}else{
-				layer.msg('无数据可清除！');
+				layer.msg('无数据可清除！', {time:2000, icon:8});
 			}			
 		}
 		$('#operationPanelContainer').children().remove();
@@ -327,7 +327,7 @@ function resizeContainer(){
 	$('.center .column-container').each(function(){
 		var height = $(this).height();
 		if(height && height !== $(this).parent().height()){
-			$(this).parent().css({height:height+2});
+			$(this).parent().css({height:height});
 		}
 	});
 
@@ -396,6 +396,19 @@ function cleanAllHtml() {
 
 	//清除元素中的.ui-sortable
 	$code.find('.linear-layout, .sub-container, .column-container').removeClass('ui-sortable');
+
+	//清除.currentEle
+	$code.find('.currentEle').removeClass('currentEle');
+
+	//过滤html标签中的属性
+	var formatCode = $.htmlClean($code.html(), {
+		format: true,
+		allowedAttributes: [
+			['id'],
+			['class']
+		]
+	});
+	$code.html(formatCode);
 }
 
 /**

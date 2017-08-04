@@ -27,6 +27,7 @@
     <script src="js/draggable.js"></script>
     <script src="js/DOMTreeToJson.js"></script>
     <script src="js/seekeditCSS.js"></script>
+    <script src="js/jquery.htmlClean.js"></script>
 </head>
 <body class="edit">
     <div class="container clearfix">
@@ -146,14 +147,14 @@
                         </div>
                         <div class="size-and-position-align clearfix">
                             <div class="size-and-position-align-row fl">
-                                <input class="btn btn-sys btn-sml" type="button" value="居左">
-                                <input class="btn btn-sys btn-sml" type="button" value="居中">
-                                <input class="btn btn-sys btn-sml" type="button" value="居右">
+                                <input class="btn btn-sys btn-sml" type="button" value="居左" name="text-align-left">
+                                <input class="btn btn-sys btn-sml" type="button" value="居中" name="text-align-center">
+                                <input class="btn btn-sys btn-sml" type="button" value="居右" name="text-align-right">
                             </div>
                             <div class="size-and-position-align-column fl">
-                                <input class="btn btn-sys btn-sml" type="button" value="居上">
-                                <input class="btn btn-sys btn-sml" type="button" value="居中">
-                                <input class="btn btn-sys btn-sml" type="button" value="居下">
+                                <input class="btn btn-sys btn-sml" type="button" value="居上" name="vertical-align-top">
+                                <input class="btn btn-sys btn-sml" type="button" value="居中" name="vertical-align-middle">
+                                <input class="btn btn-sys btn-sml" type="button" value="居下" name="vertical-align-bottom">
                             </div>
                         </div>
                         <div class="size-and-position-position">
@@ -277,7 +278,47 @@
                             <div class="fl"><input class="input-text size-sml" type="text" name="border-color" id="borderColor"></div>
                         </div>
                     </div>
-                    <!-- 边框end -->    
+                    <!-- 边框end --> 
+
+                    <!-- 文字start -->
+                    <div class="font">
+                        <h2>文字</h2>
+                        <div class="font-family clearfix">
+                            <label class="fl">font-family</label>
+                            <div class="fl">
+                                <select class="select size-sml" name="font-family">
+                                    <option value="sans-serif">sans-serif</option>
+                                    <option value="Arial">Arial</option>
+                                    <option value="Microsoft YaHei">Microsoft YaHei</option>
+                                    <option value="宋体">宋体</option>
+                                    <option value="simsun">simsun</option>
+                                    <option value="arial">arial</option>  
+                                </select>
+                            </div>
+                        </div>
+                        <div class="font-weight clearfix">
+                            <label class="fl">font-weight</label>
+                            <div class="fl">
+                                <select class="select size-sml" name="font-weight">
+                                    <option value="normal">normal</option>
+                                    <option value="bold">bold</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="font-size clearfix">
+                            <label class="fl">font-size</label>
+                            <div class="fl"><input class="input-text size-sml" type="text" name="font-size"></div>
+                        </div>
+                        <div class="color clearfix">
+                            <label class="fl" for="color">color</label>
+                            <div class="fl"><input class="input-text size-sml" type="text" name="color" id="color"></div>
+                        </div>
+                        <div class="line-height clearfix">
+                            <label class="fl">line-height</label>
+                            <div class="fl"><input class="input-text size-sml" type="text" name="line-height"></div>
+                        </div>
+                    </div>
+                    <!-- 文字end -->    
                 </div>
             </div>
             
@@ -332,6 +373,10 @@
                         <label class="fl">max-height</label>
                         <div class="fl"><input class="input-text size-sml" type="text" name="style-max-height"></div>
                     </div>
+                    <div class="style-background-color clearfix">
+                        <label class="fl">background-color</label>
+                        <div class="fl"><input class="input-text size-sml" id="styleBackgroundColor" type="text" name="style-background-color"></div>
+                    </div>
                     <div class="style-float clearfix">
                         <label class="fl">float</label>
                         <div class="fl">
@@ -363,7 +408,7 @@
                     </div>
                     <div class="style-border-color clearfix">
                         <label class="fl">border-color</label>
-                        <div class="fl"><input class="input-text size-sml" type="text" name="style-border-color"></div>
+                        <div class="fl"><input class="input-text size-sml" id="styleBorderColor" type="text" name="style-border-color"></div>
                     </div>
                     <div class="style-border-radius clearfix">
                         <label class="fl">border-radius</label>
@@ -429,21 +474,9 @@
         $('.column-module i').on('click', function(){
             $(this).parent().parent().find('.article-list-box ,.link-box, .login-box').toggle('normal');
         });
-        $('.size-and-position-position-slide').slide({});
+        $('.size-and-position-position-slide').slide({trigger:'click'});
 
-        //取色板组件
-        $('#backgroundColor, #shadowColor, #borderColor').colpick({
-            layout:'hex',
-            submit:0,
-            colorScheme:'dark',
-            onChange:function(hsb,hex,rgb,el,bySetColor) {
-                $(el).css('border-color','#'+hex);
-                // Fill the text box just if the color was set using the picker, and not the colpickSetColor function.
-                if(!bySetColor) $(el).val(hex);
-            }
-        }).keyup(function(){
-            $(this).colpickSetColor(this.value);
-        });
+
 
         // 初始化Web Uploader
         var uploader = WebUploader.create({
@@ -474,24 +507,7 @@
         //     slide: function(event, ui) {
         //         $('input[name="border-radius"]').val(ui.value + '%');
         //     }
-        // }); 
-        var nameArr = ['width', 'min-width', 'max-width', 'height', 'max-height', 'min-height', 'shadow-offsetx', 'shadow-offsety','shadow-blur-radius',
-         'border-radius', 'border-width'];
-        var positionArr = ['margin-top', 'margin-right', 'margin-bottom', 'margin-left', 'padding-top', 'padding-right', 'padding-bottom', 'padding-left', 'top', 'right', 'bottom', 'left'];
-        for(var i in nameArr){
-            $('input[name="'+ nameArr[i] +'"]').spinner();
-        }
-        for(var j in positionArr){
-            $('input[name="'+ positionArr[j] +'"]').spinner({
-                create: function( event, ui ) {
-                    var reg = /(top)|(right)|(bottom)|(left)/i;
-                    var name = event.target.name;
-                    console.log(name)
-                    $(event.target).parent().addClass(name.match(reg)[0]);
-                }
-            });
-        }
-        $('.ui-spinner a').remove();   
+        // });   
 
     })
 </script>

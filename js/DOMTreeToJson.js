@@ -39,10 +39,8 @@ function onClick(event, treeId, treeNode, clickFlag) {
     
     //把以前的toolbar所在的元素，恢复原来状态
     var lastToolbarParent = $('.toolbar').parent();
-    lastToolbarParent.css({position:'static'});
-    if(lastToolbarParent.data('display')){
-        lastToolbarParent.css({display:lastToolbarParent.data('display')})
-    }
+    lastToolbarParent.css({position:'static'}).removeClass('currentEle');
+    lastToolbarParent.data('display') ? lastToolbarParent.css({display:lastToolbarParent.data('display')}):'';
     $('.toolbar').remove();
 
     //在当前元素上添加工具
@@ -50,6 +48,8 @@ function onClick(event, treeId, treeNode, clickFlag) {
     var toolbarEntity = toolbar.init();
     ele.append(toolbarEntity).css({position:'relative'});
     
+    //保存被选元素的边框样式，给被选元素添加边框并添加标记
+    ele.addClass('currentEle');
     console.log(getStyle(ele))
     showStyle(getStyle(ele));
 
@@ -57,10 +57,7 @@ function onClick(event, treeId, treeNode, clickFlag) {
     if(ele.css('display') == 'inline'){
         ele.css({display:'inline-block'});
         ele.data('display', ele.css('display'));
-    }
-    
-   
-    
+    }      
 }
 
 /**

@@ -470,6 +470,7 @@ input::-webkit-input-placeholder{
 .right .background h2,
 .right .shadow h2,
 .right .border h2,
+.right .font h2,
 .right .style-abstract h2 {
     font: normal 13px "Helvetica Neue", sans-serif;
     line-height: 25px;
@@ -533,9 +534,9 @@ input::-webkit-input-placeholder{
 }
 .right .size-and-position .size-and-position-position-slide .bd span {
     position: absolute;
-    width: 50px;
+    width: 54px;
     height: 20px;
-    margin-left: -25px;
+    margin-left: -27px;
     margin-top: -10px;
     border-radius: 3px;
 }
@@ -556,22 +557,6 @@ input::-webkit-input-placeholder{
     left: 0;
     top: 50%;
 }
-/*.right .size-and-position .size-and-position-position-slide .bd input.size-and-position-position-top{
-    top: 0;
-    left: 50%;
-}
-.right .size-and-position .size-and-position-position-slide .bd input.size-and-position-position-right{
-    left: 100%;
-    top: 50%;
-}
-.right .size-and-position .size-and-position-position-slide .bd input.size-and-position-position-bottom{
-    left: 50%;
-    top: 100%;
-}
-.right .size-and-position .size-and-position-position-slide .bd input.size-and-position-position-left{
-    left: 0;
-    top: 50%;
-}*/
 .right .background,
 .right .shadow,
 .right .border,
@@ -582,6 +567,7 @@ input::-webkit-input-placeholder{
 .right .background > div,
 .right .shadow > div,
 .right .border > div,
+.right .font > div,
 .right .style-abstract > div {
     line-height: 35px;
 
@@ -589,6 +575,7 @@ input::-webkit-input-placeholder{
 .right .background  label,
 .right .shadow label,
 .right .border label,
+.right .font label,
 .right .style-abstract label {
     display: block;
     width: 110px;
@@ -597,6 +584,7 @@ input::-webkit-input-placeholder{
 .right .background > div div.fl,
 .right .shadow > div div.fl,
 .right .border > div div.fl,
+.right .font > div div.fl,
 .right .style-abstract > div div.fl {
     position: relative;
     width: 180px;
@@ -604,7 +592,10 @@ input::-webkit-input-placeholder{
 }
 #backgroundColor,
 #shadowColor,
-#borderColor {
+#borderColor,
+#color,
+#styleBorderColor,
+#styleBackgroundColor {
     width: 143px;
 	border-right:20px solid green;
 }
@@ -646,7 +637,8 @@ input::-webkit-input-placeholder{
     border-top: 1px solid #333;
 }
 .right .style-abstract .select,
-.right .background .select {
+.right .background .select,
+.right .font .select {
     width: 140px;
 }
 .right .edit-css-js {
@@ -662,7 +654,7 @@ input::-webkit-input-placeholder{
 .center #operationPanelContainer {
     margin: 0 auto;
     width: 1000px;
-    min-height: 1000px;
+    min-height: 800px;
 }
 
 /*------------------------------------------------------------------
@@ -701,19 +693,19 @@ input::-webkit-input-placeholder{
     width: 100%;
     height: auto;
     min-height: 200px;
-    border: 1px solid #f00;
+    outline: 1px solid #f00;
 }
 .center .sub-container {
-    width: 300px;
+    min-width: 300px;
     height: auto;
     min-height: 200px;
-    border: 1px solid #0f0;
+    outline: 1px solid #0f0;
 }
 .center .column-container {
-    width: 250px;
+    min-width: 250px;
     height: auto;
     min-height: 150px;
-    border: 1px solid #00f;
+    outline: 1px solid #00f;
 }
 .center .box > a{
     display:none;
@@ -722,6 +714,9 @@ input::-webkit-input-placeholder{
     box-sizing: border-box;
     position: relative;
     width: 100%;
+}
+.center .view *{
+    display: box;
 }
 /*------------------------------------------------------------------
                           栏目模块样式
@@ -744,6 +739,9 @@ input::-webkit-input-placeholder{
 .article-list-column2{
     box-shadow: 2px 2px 5px #aaa;
     border-radius: 50px;
+    text-align: left;
+    vertical-align: top;
+    background: url(../img/icon-row.png) left top no-repeat;
 }
 .article-list-column2 li{
     margin-left: 10px;
@@ -819,6 +817,9 @@ input::-webkit-input-placeholder{
     color: #f00;
     font-size: 18px;
 }
+.currentEle {
+    outline: 1px dashed #ddd;
+}
 .show-code{
     display: none;
     padding: 15px;
@@ -838,7 +839,7 @@ input::-webkit-input-placeholder{
                           自增输入框样式
 -------------------------------------------------------------------*/
 .ui-spinner-input {
-    margin: 0 !important;
+    margin: 0 2px !important;
     padding: 2px 5px !important;
     border: 1px solid #aaaaaa !important;
 }
@@ -846,6 +847,8 @@ input::-webkit-input-placeholder{
     border: none !important;
 }
 .right .shadow .ui-spinner-input,
-.right .border .ui-spinner-input {
+.right .border .ui-spinner-input,
+.right .font .ui-spinner-input,
+.right .style-abstract .ui-spinner-input{
     width: 143px;
 }
