@@ -28,12 +28,15 @@
     <script src="js/DOMTreeToJson.js"></script>
     <script src="js/seekeditCSS.js"></script>
     <script src="js/jquery.htmlClean.js"></script>
+    <script src="js/context.js"></script>
+    <script src="js/rightMenu.js"></script>
+    <script src="js/jQuery.Hz2Py-min.js"></script>
 </head>
 <body class="edit">
     <div class="container clearfix">
         <!-- 菜单栏start -->
         <ul class="menu-bar clearfix">
-            <li class="fl"><a href="javascript:void(0);"><i class="fa fa-floppy-o"></i>保存</a></li>
+            <li class="fl"><a class="save" href="javascript:void(0);"><i class="fa fa-floppy-o"></i>保存</a></li>
             <li class="fl"><a class="last-step" href="javascript:void(0);"><i class="fa fa-reply"></i>上一步</a></li>
             <li class="fl"><a class="next-step" href="javascript:void(0);"><i class="fa fa-share"></i>下一步</a></li>
             <li class="fl"><a class="preview-page" href="javascript:void(0);"><i class="fa fa-eye"></i>预览</a></li>
@@ -70,6 +73,12 @@
             <div class="column-module">
                 <h2>栏目组件</h2>
                 <ul>
+                    <li class="header">
+                        <div class="header-title clearfix"><h3 class="fl">页面顶部</h3><i class="fr fa fa-chevron-down"></i></div>
+                        <ul class="header-box clearfix">
+                            
+                        </ul>
+                    </li>
                     <li class="article-list">
                         <div class="article-list-title clearfix"><h3 class="fl">文章列表栏目</h3><i class="fr fa fa-chevron-down"></i></div>
                         <ul class="article-list-box clearfix">
@@ -85,6 +94,18 @@
                     <li class="login">
                         <div class="login-title clearfix"><h3 class="fl">登录栏目</h3><i class="fr fa fa-chevron-down"></i></div>
                         <ul class="login-box clearfix">
+                            
+                        </ul>
+                    </li>
+                    <li class="scroll">
+                        <div class="scroll-title clearfix"><h3 class="fl">图片轮播栏目</h3><i class="fr fa fa-chevron-down"></i></div>
+                        <ul class="scroll-box clearfix">
+                            
+                        </ul>
+                    </li>
+                    <li class="footer">
+                        <div class="footer-title clearfix"><h3 class="fl">页面底部</h3><i class="fr fa fa-chevron-down"></i></div>
+                        <ul class="footer-box clearfix">
                             
                         </ul>
                     </li>
@@ -467,16 +488,34 @@
         <!-- 右侧部分end -->
     </div>
     <div class="show-code"><textarea class="textarea"></textarea></div>
+    <div class="fm-code"></div>
+    <div class="editColumn">
+        <form class="editColumnForm">
+            <div class="formRow">
+                <label for="cName">栏目名字</label>
+                <input type="text" name="cName" class="input-text size-nor" id="cName" value="">
+                <label for="cName">英文简写</label>
+                <input type="text" name="eName" class="input-text size-nor" id="eName" value="">
+            </div>
+            <div class="formRow">
+                <label for="columnType">栏目类型</label>
+                <select class="select size-nor" name="columnType" id="columnType">
+                    <option value="1">文章列表</option>
+                    <option value="2">链接列表</option>
+                </select>
+                <label for="listNum">项目个数</label>
+                <input type="text" name="listNum" class="input-text size-nor" id="listNum" value="5">
+            </div>
+        </form>
+    </div>
 </body>
 <script>
     $(document).ready(function(){
         //栏目组件的显示隐藏
         $('.column-module i').on('click', function(){
-            $(this).parent().parent().find('.article-list-box ,.link-box, .login-box').toggle('normal');
+            $(this).parent().parent().find('.article-list-box ,.link-box, .login-box, .scroll-box, .header-box, .footer-box').toggle('normal');
         });
         $('.size-and-position-position-slide').slide({trigger:'click'});
-
-
 
         // 初始化Web Uploader
         var uploader = WebUploader.create({
@@ -507,7 +546,7 @@
         //     slide: function(event, ui) {
         //         $('input[name="border-radius"]').val(ui.value + '%');
         //     }
-        // });   
+        // });
 
     })
 </script>

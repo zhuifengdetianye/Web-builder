@@ -10,12 +10,18 @@ $(document).ready(function(){
             stop: function( event, ui ) {
                 //监听数据的改变，修改样式
                 updateEleStyle(event, false);
+
+                //保存页面
+                saveHtml();
             }
         });
         $('input[name="style-'+ nameArr[i] +'"]').spinner({
             stop: function( event, ui ) {
                 //监听数据的改变，修改样式
                 updateEleStyle(event, true);
+
+                //保存页面
+                saveHtml();
             }
         });
     }
@@ -125,6 +131,8 @@ $(document).ready(function(){
         $(this).colpickSetColor(this.value);
     });
 
+    
+
 });
 
 /**
@@ -151,6 +159,40 @@ function updateEleStyle(event, isAbstract) {
 
         //更新样式摘要
         $('input[name="style-'+ styleName +'"]').val(val);
+
+        //如果是width，同步更新父级元素
+        if($ele.hasClass('view') && styleName === 'width'){
+            $ele.parents('.column-container').width(val);
+            $ele.parents('.column-container-module').width(val);
+            $ele.parents('.box').width(val);
+            //遍历.view的父元素下的所有.view，找出最大的width
+            var arr = [];
+            var maxWidth;
+            $ele.parents('.sub-container').children('.column-container-module').each(function(){
+                arr.push($(this).width());
+            });
+            arr.sort(function(a,b){return b-a;});
+            
+            $ele.parents('.sub-container').width(arr[0]);
+            $ele.parents('.sub-container-module').width(arr[0]);
+   
+        }
+        //如果是height，同步更新父级元素
+        if($ele.hasClass('view') && styleName === 'height'){
+            $ele.children().height(val);
+            $ele.parents('.column-container').css('height', parseInt(val)+10);
+            $ele.parents('.column-container-module').css('height', parseInt(val)+10);
+            console.log($ele.parents('.column-container-module'))
+            //遍历.view的父元素下的所有.column-container-module，求出同级元素高度之和
+            var h = 0;
+            $ele.parents('.sub-container').children('.column-container-module').each(function(){
+                h += $(this).height();
+            });
+            $ele.parents('.sub-container').height(h);
+            $ele.parents('.sub-container-module').height(h);
+            $ele.parents('.linear-layout').height(h);
+            $ele.parents('.linear-layout-module').height(h);
+        }
     }else{
         var arr = $this.attr('name').split('-');
         arr.splice(0, 1);
@@ -288,11 +330,13 @@ function showStyle(style){
                 break;
             case 'boxShadow':
                 if(style[i] !== 'none'){
+                    /*
                     var obj = analysisShadowBox(style[i]);          
                     for(var j in obj){
                         var sbattr = reverseCamel(j);
                         $('input[name="shadow-'+ sbattr +'"]').val(obj[j].split('px')[0]);
                     }
+                    */
                 }               
                 break;
             default:

@@ -67,83 +67,138 @@ HandleStack.prototype = {
 
 //组件库
 var modules = {
+	header: [
+		{
+			name:'页面顶部1',
+			class:'header1',
+			html:'<header class="header1"><div class="topline"></div><div class="logo-box"><div class="logo container"><a class="entrance" href="#">【评审入口】</a></div></div></header>',
+			fm:'<header class="header1"><div class="topline"></div><div class="logo-box"><div class="logo container"><a class="entrance" href="#">【评审入口】</a></div></div></header>',
+			preview: 'icon-column1.png'			
+		}
+	],
 	articleList: [
 		{
 			name: '文章列表栏目1',
-			html: '<ul class="article-list-column1 clearfix"><li class="fl"><a href="#">津门故里，万象更新——记留学生“感知中国—津门古今”活动</a></li><li class="fl"><a href="#">郭军副校长会见美国南佛罗里达大学陈光帧教授</a></li><li class="fl"><a href="#">理学院青年教师在新型超短脉冲光纤激光器中取得新进展</a></li></ul>',
+			class: 'article-list-column1',
+			html: '<div class="article-list-column1"><div class="title clearfix"><h2 class="fl">综合新闻</h2><a class="fr more" href="#">更多</a></div><div class="info"><div class="img"><ul class="list clearfix"><li class="fl clearfix"><a class="fl" href="#">教育部办公厅关于批准清华大学</a><span class="fr">2015-01-27</span></li><li class="fl clearfix"><a class="fl" href="#">教育部办公厅关于批准清华大学</a><span class="fr">2015-01-27</span></li><li class="fl clearfix"><a class="fl" href="#">教育部办公厅关于批准清华大学</a><span class="fr">2015-01-27</span></li><li class="fl clearfix"><a class="fl" href="#">教育部办公厅关于批准清华大学</a><span class="fr">2015-01-27</span></li></ul></div></div>',
+			fm:'<div class="article-list-column1"><div class="title clearfix"><#if zhxw??><h2 class="fl">${StringUtils.HTMLEntitle(zhxw.name)}</h2><a class="fr more" href="${base}${site.subPathStr}/${zhxw.subPathCache}/"></a></#if></div><div class="info"><#if zhxw??>					<#assign zhxwPics = action.getNewWithPicByCategory(zhxw.id,1) /><#assign zhxwArticles = action.getNewArticleByCategory(zhxw.id,6) /><div class="img"><#list zhxwPics as a><img src="${base}/c/pic/${a.pic.id}"  alt="${a.title}"/></#list></div><ul class="list clearfix"><#list zhxwArticles as a><li class="fl clearfix"><a class="fl" href="${base}${site.subPathStr}/${zhxw.urlTitle}/${a.urlTitle}">${StringUtils.getHeadString(StringUtils.HTMLEntitle(a.title),40)}</a><span class="fr">${DateUtils.getDateString(a.publishTime,"yyyy-MM-dd")}</span></li></#list></ul></#if></div></div>',
 			preview: 'icon-column1.png'
 		},
 		{
 			name: '文章列表栏目2',
+			class: 'article-list-column2',
 			html: '<ul class="article-list-column2 clearfix"><li class="fl"><a href="#">津门故里，万象更新——记留学生“感知中国—津门古今”活动</a></li><li class="fl"><a href="#">郭军副校长会见美国南佛罗里达大学陈光帧教授</a></li><li class="fl"><a href="#">理学院青年教师在新型超短脉冲光纤激光器中取得新进展</a></li></ul>',
+			fm:'',
 			preview: 'icon-column1.png'
 		}
 	],
 	link: [
 		{
 			name: '链接栏目1',
+			class: 'link-column1',
 			html: '<ul class="link-column1 clearfix"><li class="fl"><a href="#">链接1</a></li><li class="fl"><a href="#">链接2</a></li><li class="fl"><a href="#">链接3</a></li></ul>',
+			fm:'',
 			preview: 'icon-column1.png'
 		},
 		{
 			name: '链接栏目2',
+			class: 'link-column2',
 			html: '<ul class="link-column2 clearfix"><li class="fl"><a href="#">链接1</a></li><li class="fl"><a href="#">链接2</a></li><li class="fl"><a href="#">链接3</a></li></ul>',
+			fm:'',
 			preview: 'icon-column1.png'
 		}
 	],
 	login: [
 		{
 			name: '登录栏目1',
+			class: 'login-column1',
 			html: '<form class="login-column1"><div><label>用户名：</label><input name="username" class="input-text"></div><div><label>密　码：</label><input name="password" class="input-text"></div><div><button class="btn btn-nor btn-success">登录</button><button class="btn btn-nor btn-warning">取消</button></div></form>',
+			fm: '',
 			preview: 'icon-column1.png'
 		}
 	],
 	topNav: [
 		{
 			name: '顶部导航组件1',
+			class: 'top-nav1',
 			html:'<nav class="top-nav1"><ul class="clearfix"><li><a href="#" hidefocus="false">首　页</a></li><li><a href="#" hidefocus="false">中心概况</a></li><li><a href="#" hidefocus="false">教学资源</a></li><li><a href="#" hidefocus="false">校企合作</a></li><li><a href="#" hidefocus="false">师资队伍</a></li><li><a href="#" hidefocus="false">管理体系</a></li><li><a href="#" hidefocus="false">资源共享</a></li><li><a href="#" hidefocus="false">规章制度</a></li><li><a href="#" hidefocus="false">虚拟仿真实验教学平台</a></li><li><a href="#" hidefocus="false">化学实验教学中心</a></li></ul></nav>',
+			fm: '',
 			preview: 'icon-top-nav.png'
+		}
+	],
+	scroll: [
+		{
+			name: '图片轮播1',
+			class: 'scroll1',
+			html:'<div class="scroll1"><div class="title clearfix"><div class="t1 fl"><span>实验室掠影</span></div><a class="fr" href="#">more</a></div><div class="info"><div class="picMarquee-left"><div class="bd"><ul class="picList"><li><div class="pic"><img src="src/images/pic1.jpg" /></div><div class="bg"></div><div class="bt"><a href="#">实验室一</a></div></li><li><div class="pic"><img src="src/images/pic1.jpg" /></div><div class="bg"></div><div class="bt"><a href="#">实验室一</a></div></li><li><div class="pic"><img src="src/images/pic1.jpg" /></div><div class="bg"></div><div class="bt"><a href="#">实验室一</a></div></li><li><div class="pic"><img src="src/images/pic1.jpg" /></div><div class="bg"></div><div class="bt"><a href="#">实验室一</a></div></li><li><div class="pic"><img src="src/images/pic1.jpg" /></div><div class="bg"></div><div class="bt"><a href="#">实验室一</a></div></li><li><div class="pic"><img src="src/images/pic1.jpg" /></div><div class="bg"></div><div class="bt"><a href="#">实验室一</a></div></li></ul></div></div></div><script>jQuery(".center .picMarquee-left").slide({mainCell:".bd ul",autoPlay:true,effect:"leftMarquee",vis:4,interTime:50});</script></div>',
+			fm: '',
+			preview: 'icon-top-nav.png'
+		}
+	],
+	footer: [
+		{
+			name:'页面底部1',
+			class: 'footer1',
+			html:'<footer class="footer1"><div class="footer-inner"><div class="top clearfix"><span class="fl">南华大学核科学技术学院</span><span class="fr">访问量：88888</span></div><div class="bottom clearfix"><span class="fl">技术支持：<a href="#">北京润尼尔网络科技有限公司</a></span><span class="fr">推荐使用chrome或firefox等主流浏览器</span></div></div></footer>',
+			fm: '<footer class="footer1"><div class="footer-inner"><div class="top clearfix"><span class="fl">南华大学核科学技术学院</span><span class="fr">${action.getVisitSessionCount()+4000}次</span></div><div class="bottom clearfix"><span class="fl">技术支持：<a href="#">北京润尼尔网络科技有限公司</a></span><span class="fr">推荐使用chrome或firefox等主流浏览器</span></div></div></footer>',
+			preview: 'icon-column1.png'
 		}
 	],
 	basicElement: [
 		{
 			name: '容器',
+			class: '',
 			html: '<div>容器</div>',
+			fm: '',
 			preview: 'icon-top-nav.png'
 		},
 		{
 			name: '标题',
+			class: '',
 			html: '<h3>标题</h3>',
+			fm: '',
 			preview: 'icon-top-nav.png'
 		},
 		{
 			name: '分割线',
+			class: '',
 			html: '<hr>',
+			fm: '',
 			preview: 'icon-top-nav.png'
 		},
 		{
 			name: '文字',
+			class: '',
 			html: '<span>文字</span>',
+			fm: '',
 			preview: 'icon-top-nav.png'
 		},
 		{
 			name: '图片',
+			class: '',
 			html: '<img src="img/icon-top-nav.png">',
+			fm: '',
 			preview: 'icon-top-nav.png'
 		},
 		{
 			name: '按钮',
+			class: '',
 			html: '<button>按钮</button>',
+			fm: '',
 			preview: 'icon-top-nav.png'
 		},
 		{
 			name: '视频',
+			class: '',
 			html: '<vedio></vedio>',
+			fm: '',
 			preview: 'icon-top-nav.png'
 		},
 		{
 			name: '链接',
+			class: '',
 			html: '<a href="#">链接</a>',
+			fm: '',
 			preview: 'icon-top-nav.png'
 		}
 	]
@@ -161,7 +216,30 @@ $(document).ready(function(){
 			$('.' + className + '-box').append('<li class="fl"><div class="box"><a class="preview-img" href="javascript:void(0);"><img src="img/'+ modules[i][j].preview +'" alt="'+ modules[i][j].name +'"><span>'+ modules[i][j].name +'</span></a><div class="view">'+ modules[i][j].html +'</div></div></li>');
 		}	
 	}
+	//保存
+	$('.save').on('click', function(){
+		//过滤html代码
+		cleanAllHtml();
+		
+		//格式化html代码
+		// var html = HTMLFormat(trimAll(jQuery.trim($('.clean-code').html())));
+		var html = HTMLFormat($('.clean-code').html());
+		var fm = $('.fm-code').html(html);
+		$('.fm-code .view').each(function(i, e){
+			var className = $(e).children().attr('class');
+			
+			for(var j in modules){
+				for(var k=0; k<modules[j].length; k++){
+					if(modules[j][k].class === className){
+						$(e).empty();
+						$(e).text(modules[j][k].fm);
+					}
+				}
+			}	
+		});
+		console.log($('.fm-code').html().replace(/&gt;/g, '>').replace(/&lt;/g, '<'));
 
+	});
 	//上一步的操作
 	$('.last-step').on('click', function(){
 		if(handleStack.DOMStack.length){
@@ -349,6 +427,17 @@ function resizeContainer(){
 }
 
 /**
+ * parseDOM() 将字符串转换为DOM
+ * @param <String> str
+ * @return <Object> node
+ */	
+function parseDOM(str){
+	var ele = document.createElement('div');
+	ele.innerHTML = str;
+	return ele.childNodes;
+}
+
+/**
  * trimAll() 删除空格，空行
  * @param <String> str
  * @return <String> str
@@ -405,7 +494,8 @@ function cleanAllHtml() {
 		format: true,
 		allowedAttributes: [
 			['id'],
-			['class']
+			['class'],
+			['style']
 		]
 	});
 	$code.html(formatCode);
